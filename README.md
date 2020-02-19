@@ -25,6 +25,9 @@ I am currently in favor of Method 1, since there is already an algorithm in Phyt
 that will generate a contour around a user's clicks. This means I wouldn't have to
 draw a ton of contours around roots.
 
+![alt tag](https://github.com/jbustamante35/soulsearch/blob/master/sampledata/images/exampleroot_ler001_5_t0.png)
+
+
 ## Installation
 Clone this repository into your desired location with
 
@@ -32,6 +35,19 @@ Clone this repository into your desired location with
 git clone https://github.com/jbustamante35/soulsearch
 ```
 
+## To-Do
+1) Import minimal suite of functions from rootKinematics to get pipeline
+running as expected <br />
+    a) Refactor the pipeline to minimize overhead and compute power <br />
+    b) Write headless version to run from commandline <br />
+
+2) Extract clicking coordinates from finished datasets <br />
+    a) Midlines <br />
+    b) Quiecent Centers <br />
+
+3) Write a learning algorithm that predicts midlines and qc from root images <br />
+
+4)
 
 ## Author
 **Julian Bustamante**, Cellular and Molecular Biology (<jbustamante@wisc.edu> <br />
