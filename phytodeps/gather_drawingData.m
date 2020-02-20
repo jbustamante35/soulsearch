@@ -32,11 +32,21 @@ function [jP] = gather_drawingData(jP)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     for e = 1:numel(jP)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % sample the image via user
+        % sample the image via user or use inputted coordinates
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            hIdx  = 1;
-            curve = myDraw(jP(e).inPort.fileList{1}.fileName,'message',{'please click along midline','please click on QC'}, 'hIdx', hIdx);
-%             curve = myDraw(jP(e).inPort.fileList{1}.fileName,'message',{'please click along midline','please click on QC'});
+            hIdx  = 1;            
+            if isempty(jP(e).para.mline)
+                curve = myDraw(jP(e).inPort.fileList{1}.fileName,'message',{'please click along midline','please click on QC'}, 'hIdx', hIdx);
+%                 saveCurveCoords(curve); % Don't need this anymore
+            else
+                % Use inputted coordinates and open a figure
+                figs = figure(hIdx);
+                set(0, 'CurrentFigure', hIdx);
+                set(figs, 'Color', 'w');
+                figclr(hIdx);
+                curve = {jP(e).para.mline , jP(e).para.qc};
+            end
+            
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % combine user data
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -65,6 +75,17 @@ function [jP] = gather_drawingData(jP)
             
     end
 end
+
+function saveCurveCoords(curve)
+%% saveCurveCoords: save clicked coordinates in .csv file
+mline  = curve{1};
+qc     = curve{2};
+qcline = [qc ; mline];
+tnm   = sprintf('%s_ClickedCoordinates_%02dcoords.txt', tdate, length(mline));
+csvwrite(tnm, qcline);
+
+end
+
 %{
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % display

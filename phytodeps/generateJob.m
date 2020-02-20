@@ -158,6 +158,8 @@ function [jP] = generateJob(para,Ostore)
                     jP{e}.attachFunction(@(x)straightKinematics_main(x));
                     jP{e}.attachStagingFunction(@(x)gather_drawingData(x));
                     jP{e}.attachParaField('kinematicsType ','steadyState');
+                    jP{e}.attachParaField('mline', para.mline);
+                    jP{e}.attachParaField('qc', para.qc);
                     jP{e}.setDisp(1);                    
                 end
                 % gather draw data

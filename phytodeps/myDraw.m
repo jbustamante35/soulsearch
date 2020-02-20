@@ -39,12 +39,12 @@ function [data] = myDraw(varargin)
         msgLoop = extraArgs.message;
     end
 
-    for e = 1:numel(msgLoop)
-        h1 = msgbox(msgLoop{e},'phytoG','modal');
-        uiwait(h1);
+    for e = 1:numel(msgLoop)        
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % sample data from user
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         h1 = msgbox(msgLoop{e},'phytoG','modal');
+%         uiwait(h1);
 %         if ~isempty(I)
             %h = figure;
             %imshow(I);
@@ -61,6 +61,7 @@ function [data] = myDraw(varargin)
         set(figs, 'Color', 'w');
         figclr(hIdx);
         myimagesc(I);
+        title(msgLoop{e});
         plt     = subplot(1, 1, 1);
         c       = drawpolygon(plt, 'Color', 'r');
         data{e} = c.Position;
