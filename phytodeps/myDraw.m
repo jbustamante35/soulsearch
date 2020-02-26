@@ -62,9 +62,17 @@ function [data] = myDraw(varargin)
         figclr(hIdx);
         myimagesc(I);
         title(msgLoop{e});
-        plt     = subplot(1, 1, 1);
-        c       = drawpolygon(plt, 'Color', 'r');
-        data{e} = c.Position;
+        try
+            sbplt = subplot(1, 1, 1);
+            c     = drawpolygon(sbplt, 'Color', 'r');
+            crds  = c.Position;
+        catch
+            fprintf('Reverting to impixel\n');
+            [x,y,~] = impixel;
+            crds    = [x , y];
+        end
+        
+        data{e} = crds;
         
     end
     
